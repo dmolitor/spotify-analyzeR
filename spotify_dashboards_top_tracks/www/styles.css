@@ -1,0 +1,41 @@
+
+
+.card-deck {
+  display: flex;
+  justify-content: flex-start;
+  flex-flow: row wrap;
+  align-items: stretch;
+  padding: 0px;
+  border-spacing: 0;
+}
+.card-deck .card {
+  /*display: block;*/
+  flex-basis: 21%; /* change this value for each breakpoint*/
+}
+.card {
+    font-size: 1em;
+    margin: 20px;
+    padding: 0;
+    border: none;
+    border-radius: .28571429rem;
+    box-shadow: none;
+    @media(min-width: 56rem) {
+      width: 24%;
+    }
+}
+
+.card-block {
+    font-size: 1em;
+    position: relative;
+    margin: 0;
+    padding: none;
+    border: none;
+    border-top: 1px solid rgba(34, 36, 38, .1);
+    box-shadow: none;
+}
+
+.card-img-top {
+    display: block;
+    width: 100%;
+    height: auto;
+}

@@ -1,0 +1,10 @@
+name: spotify_dashboards_top_artists
+title:
+username:
+account: molitdj97
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 3219351
+bundleId: 3868072
+url: https://dmolitor.shinyapps.io/spotify_dashboards_top_artists/
+when: 1605553665.26845
