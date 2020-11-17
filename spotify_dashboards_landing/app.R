@@ -28,21 +28,21 @@ scopes <- c(
 
 top_tracks_url <- "https://accounts.spotify.com/authorize" %>%
     urltools::param_set("response_type", "code") %>%
-    urltools::param_set("client_id", "dc5afe83306449ea9af613c915b2f7fd") %>%
+    urltools::param_set("client_id", Sys.getenv("SPOTIFY_ID")) %>%
     urltools::param_set("redirect_uri", 
                         "https%3A%2F%2Fdmolitor.shinyapps.io%2Fspotify_dashboards_top_tracks%2F") %>%
     urltools::param_set("scope", URLencode(paste0(scopes, collapse = " ")))
 
 top_artists_url <- "https://accounts.spotify.com/authorize" %>%
     urltools::param_set("response_type", "code") %>%
-    urltools::param_set("client_id", "dc5afe83306449ea9af613c915b2f7fd") %>%
+    urltools::param_set("client_id", Sys.getenv("SPOTIFY_ID")) %>%
     urltools::param_set("redirect_uri", 
                         "https%3A%2F%2Fdmolitor.shinyapps.io%2Fspotify_dashboards_top_artists%2F") %>%
     urltools::param_set("scope", URLencode(paste0(scopes, collapse = " ")))
 
 tracks_analysis_url <- "https://accounts.spotify.com/authorize" %>%
     urltools::param_set("response_type", "code") %>%
-    urltools::param_set("client_id", "dc5afe83306449ea9af613c915b2f7fd") %>%
+    urltools::param_set("client_id", Sys.getenv("SPOTIFY_ID")) %>%
     urltools::param_set("redirect_uri", 
                         "https%3A%2F%2Fdmolitor.shinyapps.io%2Fspotify_dashboards_tracks_analysis%2F") %>%
     urltools::param_set("scope", URLencode(paste0(scopes, collapse = " ")))
@@ -54,15 +54,15 @@ tracks_analysis_url <- "https://accounts.spotify.com/authorize" %>%
 #                         "http%3A%2F%2F127.0.0.1%3A3689%2F") %>%
 #     urltools::param_set("scope", URLencode(paste0(scopes, collapse = " ")))
 
-ui <- fillPage(title = "Spotify Insights",
+ui <- fillPage(title = "Spotify AnalyzeR",
                padding = 20,
     tags$head(tags$script(jscode),
               tags$style("text-align: center")),
     theme = shinytheme("superhero"),
     titlePanel(withTags(
-        div("Spotify Insights",
+        div("Spotify AnalyzeR",
             div(class = 'pull-right',
-                a(href = 'https://dmolitor.com',
+                a(href = 'https://github.com/dmolitor/spotify_analyzeR',
                   icon('github'))), hr() ))
     ),
     fillCol(align = "center",

@@ -11,7 +11,7 @@ ui <- fluidPage(theme = shinytheme("superhero"),
                 titlePanel(withTags(
                     div("Top Tracks",
                         div(class = 'pull-right',
-                            a(href = 'https://dmolitor.com',
+                            a(href = 'https://github.com/dmolitor/spotify_analyzeR',
                               icon('github'))), hr() ))
                 ),
                 numericInput(inputId = "numTracks",
@@ -39,8 +39,8 @@ server <- function(input, output, session) {
              body = list(grant_type = "authorization_code",
                          code = parseQueryString(session$clientData$url_search)$code,
                          redirect_uri = "https://dmolitor.shinyapps.io/spotify_dashboards_top_tracks/",
-                         client_id = "dc5afe83306449ea9af613c915b2f7fd",
-                         client_secret = "7e9cfcbfd7a3457e80216e991dec40ea"),
+                         client_id = Sys.getenv("SPOTIFY_ID"),
+                         client_secret = Sys.getenv("SPOTIFY_SECRET")),
              encode = "form")
     })
     
