@@ -5,6 +5,6 @@ account: molitdj97
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 3243878
-bundleId: 3869749
+bundleId: 3872085
 url: https://dmolitor.shinyapps.io/spotify_dashboards_landing/
-when: 1605589651.63972
+when: 1605629909.40321

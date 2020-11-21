@@ -10,10 +10,10 @@ library(tidyr)
 library(viridis)
 
 ui <- fluidPage(theme = shinytheme("superhero"),
-                title = "Audio Analysis",
+                title = "Audio Analysis - Top Tracks",
                 # Application title
                 titlePanel(withTags(
-                    div("Audio Analysis",
+                    div("Audio Analysis - Top Tracks",
                         div(class = 'pull-right',
                             a(href = 'https://github.com/dmolitor/spotify_analyzeR',
                               icon('github'))), hr() ))
@@ -405,7 +405,7 @@ server <- function(input, output, session) {
                   axis.ticks = element_blank(),
                   title = element_text(face = "bold", color = "white"),
                   axis.text = element_text(color = "white")) +
-            labs(y = snakecase::to_sentence_case("duration (minutes)"), x = "") +
+            labs(y = snakecase::to_sentence_case("duration"), x = "") +
             scale_color_viridis(option = "C", 1)
     })
 }
