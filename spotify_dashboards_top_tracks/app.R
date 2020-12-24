@@ -30,7 +30,15 @@ ui <- fluidPage(theme = shinytheme("superhero"),
                 fluidRow(
                     column(12,
                            uiOutput('topTracks'))
-                    )
+                    ),
+                actionButton("homeButton", 
+                             "Home", 
+                             onclick = paste0(
+                                 "location.href='",
+                                 "https://dmolitor.shinyapps.io/spotify_dashboards_landing/",
+                                 "';"
+                             ),
+                             width = "175px")
 )
 
 server <- function(input, output, session) {
@@ -73,7 +81,8 @@ server <- function(input, output, session) {
         track_info <- tibble(name = track_names,
                              src = track_album_art,
                              album = track_album,
-                             artist = track_artist)
+                             artist = track_artist) %>%
+            distinct(name, artist, .keep_all = TRUE)
         
         # # gallery DIV
         lightbox_gallery(track_info %>%

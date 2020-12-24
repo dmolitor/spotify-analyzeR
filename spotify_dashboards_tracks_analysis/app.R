@@ -56,8 +56,15 @@ ui <- fluidPage(theme = shinytheme("superhero"),
                 h4("How fast the song is in beats per minute"),
                 plotOutput("tempo", width = "100%"),
                 h2("Duration (in minutes)"),
-                plotOutput("duration", width = "100%")
-                
+                plotOutput("duration", width = "100%"),
+                actionButton("homeButton", 
+                             "Home", 
+                             onclick = paste0(
+                                 "location.href='",
+                                 "https://dmolitor.shinyapps.io/spotify_dashboards_landing/",
+                                 "';"
+                             ),
+                             width = "175px")
 )
 
 server <- function(input, output, session) {
@@ -111,12 +118,14 @@ server <- function(input, output, session) {
         
         top_tracks_content %>%
             select(id, name, artist, where(is.numeric), -time_signature) %>%
+            distinct(name, artist, .keep_all = TRUE) %>%
             mutate(duration = round(duration_ms/60000, 2))
     })
     
     output$danceability <- renderPlot({
         ggplot(top_tracks_df() %>%
-                   head(input$numTracks),
+                   head(input$numTracks) %>%
+                   distinct(name, .keep_all = TRUE),
                aes(x = forcats::fct_reorder(name, danceability), 
                    y = danceability)) +
             geom_point(color = "white") +
@@ -144,12 +153,13 @@ server <- function(input, output, session) {
                   title = element_text(face = "bold", color = "white"),
                   axis.text = element_text(color = "white")) +
             labs(y = snakecase::to_sentence_case("danceability"), x = "") +
-            scale_color_viridis(option = "C", 1)
+            scale_color_viridis(option = "C", 1, begin = .2)
     })
     
     output$energy <- renderPlot({
         ggplot(top_tracks_df() %>%
-                   head(input$numTracks),
+                   head(input$numTracks) %>%
+                   distinct(name, .keep_all = TRUE),
                aes(x = forcats::fct_reorder(name, energy), 
                    y = energy)) +
             geom_point(color = "white") +
@@ -177,12 +187,13 @@ server <- function(input, output, session) {
                   title = element_text(face = "bold", color = "white"),
                   axis.text = element_text(color = "white")) +
             labs(y = snakecase::to_sentence_case("energy"), x = "") +
-            scale_color_viridis(option = "C", 1)
+            scale_color_viridis(option = "C", 1, begin = .2)
     })
     
     output$loudness <- renderPlot({
         ggplot(top_tracks_df() %>%
-                   head(input$numTracks),
+                   head(input$numTracks) %>%
+                   distinct(name, .keep_all = TRUE),
                aes(x = forcats::fct_reorder(name, loudness), 
                    y = loudness)) +
             geom_point(color = "white") +
@@ -209,12 +220,13 @@ server <- function(input, output, session) {
                   title = element_text(face = "bold", color = "white"),
                   axis.text = element_text(color = "white")) +
             labs(y = snakecase::to_sentence_case("loudness"), x = "") +
-            scale_color_viridis(option = "C", 1)
+            scale_color_viridis(option = "C", 1, begin = .2)
     })
     
     output$speechiness <- renderPlot({
         ggplot(top_tracks_df() %>%
-                   head(input$numTracks),
+                   head(input$numTracks) %>%
+                   distinct(name, .keep_all = TRUE),
                aes(x = forcats::fct_reorder(name, speechiness), 
                    y = speechiness)) +
             geom_point(color = "white") +
@@ -242,12 +254,13 @@ server <- function(input, output, session) {
                   title = element_text(face = "bold", color = "white"),
                   axis.text = element_text(color = "white")) +
             labs(y = snakecase::to_sentence_case("speechiness"), x = "") +
-            scale_color_viridis(option = "C", 1)
+            scale_color_viridis(option = "C", 1, begin = .2)
     })
 
     output$acousticness <- renderPlot({
         ggplot(top_tracks_df() %>%
-                   head(input$numTracks),
+                   head(input$numTracks) %>%
+                   distinct(name, .keep_all = TRUE),
                aes(x = forcats::fct_reorder(name, acousticness), 
                    y = acousticness)) +
             geom_point(color = "white") +
@@ -275,12 +288,13 @@ server <- function(input, output, session) {
                   title = element_text(face = "bold", color = "white"),
                   axis.text = element_text(color = "white")) +
             labs(y = snakecase::to_sentence_case("acousticness"), x = "") +
-            scale_color_viridis(option = "C", 1)
+            scale_color_viridis(option = "C", 1, begin = .2)
     })
     
     output$instrumentalness <- renderPlot({
         ggplot(top_tracks_df() %>%
-                   head(input$numTracks),
+                   head(input$numTracks) %>%
+                   distinct(name, .keep_all = TRUE),
                aes(x = forcats::fct_reorder(name, instrumentalness), 
                    y = instrumentalness)) +
             geom_point(color = "white") +
@@ -308,12 +322,13 @@ server <- function(input, output, session) {
                   title = element_text(face = "bold", color = "white"),
                   axis.text = element_text(color = "white")) +
             labs(y = snakecase::to_sentence_case("instrumentalness"), x = "") +
-            scale_color_viridis(option = "C", 1)
+            scale_color_viridis(option = "C", 1, begin = .2)
     })
     
     output$valence <- renderPlot({
         ggplot(top_tracks_df() %>%
-                   head(input$numTracks),
+                   head(input$numTracks) %>%
+                   distinct(name, .keep_all = TRUE),
                aes(x = forcats::fct_reorder(name, valence), 
                    y = valence)) +
             geom_point(color = "white") +
@@ -341,12 +356,13 @@ server <- function(input, output, session) {
                   title = element_text(face = "bold", color = "white"),
                   axis.text = element_text(color = "white")) +
             labs(y = snakecase::to_sentence_case("valence"), x = "") +
-            scale_color_viridis(option = "C", 1)
+            scale_color_viridis(option = "C", 1, begin = .2)
     })
     
     output$tempo <- renderPlot({
         ggplot(top_tracks_df() %>%
-                   head(input$numTracks),
+                   head(input$numTracks) %>%
+                   distinct(name, .keep_all = TRUE),
                aes(x = forcats::fct_reorder(name, tempo), 
                    y = tempo)) +
             geom_point(color = "white") +
@@ -374,12 +390,13 @@ server <- function(input, output, session) {
                   title = element_text(face = "bold", color = "white"),
                   axis.text = element_text(color = "white")) +
             labs(y = snakecase::to_sentence_case("tempo"), x = "") +
-            scale_color_viridis(option = "C", 1)
+            scale_color_viridis(option = "C", 1, begin = .2)
     })
     
     output$duration <- renderPlot({
         ggplot(top_tracks_df() %>%
-                   head(input$numTracks),
+                   head(input$numTracks) %>%
+                   distinct(name, .keep_all = TRUE),
                aes(x = forcats::fct_reorder(name, duration), 
                    y = duration)) +
             geom_point(color = "white") +
@@ -406,7 +423,7 @@ server <- function(input, output, session) {
                   title = element_text(face = "bold", color = "white"),
                   axis.text = element_text(color = "white")) +
             labs(y = snakecase::to_sentence_case("duration"), x = "") +
-            scale_color_viridis(option = "C", 1)
+            scale_color_viridis(option = "C", 1, begin = .2)
     })
 }
 

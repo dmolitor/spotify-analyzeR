@@ -30,7 +30,15 @@ ui <- fluidPage(theme = shinytheme("superhero"),
                 fluidRow(
                     column(12, 
                            uiOutput('topArtists')
-                    ))
+                    )),
+                actionButton("homeButton", 
+                             "Home", 
+                             onclick = paste0(
+                                 "location.href='",
+                                 "https://dmolitor.shinyapps.io/spotify_dashboards_landing/",
+                                 "';"
+                             ),
+                             width = "175px")
 )
 
 server <- function(input, output, session) {

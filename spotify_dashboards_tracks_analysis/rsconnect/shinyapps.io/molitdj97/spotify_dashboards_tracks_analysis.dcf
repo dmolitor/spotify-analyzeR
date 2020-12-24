@@ -5,6 +5,6 @@ account: molitdj97
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 3243288
-bundleId: 3888466
+bundleId: 4024453
 url: https://dmolitor.shinyapps.io/spotify_dashboards_tracks_analysis/
-when: 1605970973.22502
+when: 1608775850.77017
