@@ -9,7 +9,7 @@ library(shinythemes)
 library(tidyr)
 library(viridis)
 
-ui <- fluidPage(theme = shinytheme("superhero"),
+ui <- fluidPage(theme = shinytheme("slate"),
                 title = "Audio Analysis - Top Tracks",
                 # Application title
                 titlePanel(withTags(
