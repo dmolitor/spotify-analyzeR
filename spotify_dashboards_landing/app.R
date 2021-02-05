@@ -57,7 +57,7 @@ tracks_analysis_url <- "https://accounts.spotify.com/authorize" %>%
 ui <- fillPage(title = "Spotify AnalyzeR",
                padding = 10,
     tags$head(tags$script(jscode)),
-    theme = shinytheme("slate"),
+    theme = shinytheme("readable"),
     titlePanel(withTags(
         div("Spotify AnalyzeR",
             div(class = 'pull-right',

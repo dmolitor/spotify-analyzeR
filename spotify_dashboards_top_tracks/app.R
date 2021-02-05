@@ -5,7 +5,7 @@ library(shinythemes)
 
 source('src/lightbox.R')
 
-ui <- fluidPage(theme = shinytheme("slate"),
+ui <- fluidPage(theme = shinytheme("readable"),
                 title = "Top Tracks",
                 # Application title
                 titlePanel(withTags(
