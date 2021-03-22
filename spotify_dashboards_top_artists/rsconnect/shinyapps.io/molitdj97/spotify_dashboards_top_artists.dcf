@@ -5,6 +5,6 @@ account: molitdj97
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 3219351
-bundleId: 4186744
+bundleId: 4381593
 url: https://dmolitor.shinyapps.io/spotify_dashboards_top_artists/
-when: 1612563299.90926
+when: 1616442099.33016

@@ -18,19 +18,24 @@ ui <- fluidPage(theme = shinytheme("readable"),
                             a(href = 'https://github.com/dmolitor/spotify_analyzeR',
                               icon('github'))), hr() ))
                 ),
-                numericInput(inputId = "numTracks",
-                             label = "Number of Tracks",
-                             value = 25,
-                             min = 1,
-                             max = 50,
-                             step = 1,
-                             width = "120px"),
-                selectInput(inputId = "tracks",
-                            label = "Time Range",
-                            choices = c("Short-term (4 weeks)" = "short_term",
-                                        "Medium-term (6 months)" = "medium_term",
-                                        "Long-term (Several years)" = "long_term"),
-                            multiple = FALSE),
+                fluidRow(
+                    column(2,
+                           numericInput(inputId = "numTracks",
+                                        label = "Number of Tracks",
+                                        value = 25,
+                                        min = 1,
+                                        max = 50,
+                                        step = 1,
+                                        width = "250px")),
+                    column(4,
+                           selectInput(inputId = "tracks",
+                                       label = "Time Range",
+                                       choices = c("Short-term (4 weeks)" = "short_term",
+                                                   "Medium-term (6 months)" = "medium_term",
+                                                   "Long-term (Several years)" = "long_term"),
+                                       multiple = FALSE,
+                                       width = "250px"))
+                ),
                 h2("Danceability"),
                 h4("How suitable the song is for dancing on a scale of 0 - 1"),
                 plotOutput("danceability", width = "100%"),
@@ -57,6 +62,7 @@ ui <- fluidPage(theme = shinytheme("readable"),
                 plotOutput("tempo", width = "100%"),
                 h2("Duration (in minutes)"),
                 plotOutput("duration", width = "100%"),
+                br(),
                 actionButton("homeButton", 
                              "Home", 
                              onclick = paste0(
@@ -124,6 +130,7 @@ server <- function(input, output, session) {
     
     output$danceability <- renderPlot({
         ggplot(top_tracks_df() %>%
+                   mutate(across(where(is.numeric), ~ round(.x, 2))) %>%
                    head(input$numTracks) %>%
                    distinct(name, .keep_all = TRUE),
                aes(x = forcats::fct_reorder(name, danceability), 
@@ -158,6 +165,7 @@ server <- function(input, output, session) {
     
     output$energy <- renderPlot({
         ggplot(top_tracks_df() %>%
+                   mutate(across(where(is.numeric), ~ round(.x, 2))) %>%
                    head(input$numTracks) %>%
                    distinct(name, .keep_all = TRUE),
                aes(x = forcats::fct_reorder(name, energy), 
@@ -192,6 +200,7 @@ server <- function(input, output, session) {
     
     output$loudness <- renderPlot({
         ggplot(top_tracks_df() %>%
+                   mutate(across(where(is.numeric), ~ round(.x, 2))) %>%
                    head(input$numTracks) %>%
                    distinct(name, .keep_all = TRUE),
                aes(x = forcats::fct_reorder(name, loudness), 
@@ -225,6 +234,7 @@ server <- function(input, output, session) {
     
     output$speechiness <- renderPlot({
         ggplot(top_tracks_df() %>%
+                   mutate(across(where(is.numeric), ~ round(.x, 2))) %>%
                    head(input$numTracks) %>%
                    distinct(name, .keep_all = TRUE),
                aes(x = forcats::fct_reorder(name, speechiness), 
@@ -259,6 +269,7 @@ server <- function(input, output, session) {
 
     output$acousticness <- renderPlot({
         ggplot(top_tracks_df() %>%
+                   mutate(across(where(is.numeric), ~ round(.x, 2))) %>%
                    head(input$numTracks) %>%
                    distinct(name, .keep_all = TRUE),
                aes(x = forcats::fct_reorder(name, acousticness), 
@@ -293,6 +304,7 @@ server <- function(input, output, session) {
     
     output$instrumentalness <- renderPlot({
         ggplot(top_tracks_df() %>%
+                   mutate(across(where(is.numeric), ~ round(.x, 2))) %>%
                    head(input$numTracks) %>%
                    distinct(name, .keep_all = TRUE),
                aes(x = forcats::fct_reorder(name, instrumentalness), 
@@ -327,6 +339,7 @@ server <- function(input, output, session) {
     
     output$valence <- renderPlot({
         ggplot(top_tracks_df() %>%
+                   mutate(across(where(is.numeric), ~ round(.x, 2))) %>%
                    head(input$numTracks) %>%
                    distinct(name, .keep_all = TRUE),
                aes(x = forcats::fct_reorder(name, valence), 
@@ -361,6 +374,7 @@ server <- function(input, output, session) {
     
     output$tempo <- renderPlot({
         ggplot(top_tracks_df() %>%
+                   mutate(across(where(is.numeric), ~ round(.x, 2))) %>%
                    head(input$numTracks) %>%
                    distinct(name, .keep_all = TRUE),
                aes(x = forcats::fct_reorder(name, tempo), 
@@ -395,6 +409,7 @@ server <- function(input, output, session) {
     
     output$duration <- renderPlot({
         ggplot(top_tracks_df() %>%
+                   mutate(across(where(is.numeric), ~ round(.x, 2))) %>%
                    head(input$numTracks) %>%
                    distinct(name, .keep_all = TRUE),
                aes(x = forcats::fct_reorder(name, duration), 
