@@ -30,21 +30,21 @@ top_tracks_url <- "https://accounts.spotify.com/authorize" %>%
     urltools::param_set("response_type", "code") %>%
     urltools::param_set("client_id", Sys.getenv("SPOTIFY_ID")) %>%
     urltools::param_set("redirect_uri", 
-                        "https%3A%2F%2Fdmolitor.shinyapps.io%2Fspotify_dashboards_top_tracks%2F") %>%
+                        "http%3A%2F%2Fdjmolitor.com%2Fshiny%2Fspotify_dashboards_top_tracks%2F") %>%
     urltools::param_set("scope", URLencode(paste0(scopes, collapse = " ")))
 
 top_artists_url <- "https://accounts.spotify.com/authorize" %>%
     urltools::param_set("response_type", "code") %>%
     urltools::param_set("client_id", Sys.getenv("SPOTIFY_ID")) %>%
     urltools::param_set("redirect_uri", 
-                        "https%3A%2F%2Fdmolitor.shinyapps.io%2Fspotify_dashboards_top_artists%2F") %>%
+                        "http%3A%2F%2Fdjmolitor.com%2Fshiny%2Fspotify_dashboards_top_artists%2F") %>%
     urltools::param_set("scope", URLencode(paste0(scopes, collapse = " ")))
 
 tracks_analysis_url <- "https://accounts.spotify.com/authorize" %>%
     urltools::param_set("response_type", "code") %>%
     urltools::param_set("client_id", Sys.getenv("SPOTIFY_ID")) %>%
     urltools::param_set("redirect_uri", 
-                        "https%3A%2F%2Fdmolitor.shinyapps.io%2Fspotify_dashboards_tracks_analysis%2F") %>%
+                        "http%3A%2F%2Fdjmolitor.com%2Fshiny%2Fspotify_dashboards_tracks_analysis%2F") %>%
     urltools::param_set("scope", URLencode(paste0(scopes, collapse = " ")))
 
 # demo_url <- "https://accounts.spotify.com/authorize" %>%
@@ -62,9 +62,10 @@ ui <- fillPage(title = "Spotify AnalyzeR",
         div("Spotify AnalyzeR",
             div(class = 'pull-right',
                 a(href = 'https://github.com/dmolitor/spotify_analyzeR',
-                  icon('github'))),
-            hr()))
+                  icon('github')))))
     ),
+    uiOutput(outputId = "personalURL"),
+    hr(),
     fillCol(align = "center",
             h1("Personalized Spotify Insights"),
             fluidRow(),
@@ -94,6 +95,9 @@ ui <- fillPage(title = "Spotify AnalyzeR",
 )
 
 server <- function(input, output, session) {
+    output$personalURL <- renderUI({
+        tagList("Created by", a("Daniel Molitor", href="https://dmolitor.com"))
+    })
     # output$authToken <- renderText({
     #     parseQueryString(session$clientData$url_search)$code
     # })

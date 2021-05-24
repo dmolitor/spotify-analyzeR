@@ -1,6 +1,6 @@
 # Spotify AnalyzeR
 ![App landing page](/img/landing_page_snip.PNG)
-The [Spotify AnalyzeR app](https://dmolitor.shinyapps.io/spotify_dashboards_landing/) generates personalized Spotify listening insights
+The [Spotify AnalyzeR app](http://djmolitor.com/shiny/spotify_dashboards_landing/) generates personalized Spotify listening insights
 using [Spotify for Developers](https://developer.spotify.com/documentation/web-api/) and [R shiny](https://shiny.rstudio.com/).
 # App Overview
 The app examines three main features of interest:

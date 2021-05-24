@@ -41,7 +41,7 @@ ui <- fluidPage(theme = shinytheme("readable"),
                              "Home", 
                              onclick = paste0(
                                  "location.href='",
-                                 "https://dmolitor.shinyapps.io/spotify_dashboards_landing/",
+                                 "http://djmolitor.com/shiny/spotify_dashboards_landing/",
                                  "';"
                              ),
                              width = "175px")
@@ -52,7 +52,7 @@ server <- function(input, output, session) {
         POST(url = "https://accounts.spotify.com/api/token",
              body = list(grant_type = "authorization_code",
                          code = parseQueryString(session$clientData$url_search)$code,
-                         redirect_uri = "https://dmolitor.shinyapps.io/spotify_dashboards_top_tracks/",
+                         redirect_uri = "http://djmolitor.com/shiny/spotify_dashboards_top_tracks/",
                          client_id = Sys.getenv("SPOTIFY_ID"),
                          client_secret = Sys.getenv("SPOTIFY_SECRET")),
              encode = "form")
