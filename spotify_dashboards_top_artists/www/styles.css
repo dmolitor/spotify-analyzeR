@@ -36,8 +36,6 @@
 
 .card-img-top {
     display: block;
-    margin-left: auto;
-    margin-right: auto;
     width: auto;
-    height: 270px;
+    height: 250px
 }
